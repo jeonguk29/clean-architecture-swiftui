@@ -11,7 +11,7 @@ import SwiftUI
 struct TestCleanArchitectureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ToDoListViewModel()) // 뷰모델을 외부에서 주입 
         }
     }
 }
