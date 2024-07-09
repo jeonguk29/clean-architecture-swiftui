@@ -12,30 +12,36 @@
 
 import UIKit
 
+// 여기 인터럽트에 비즈니스 로직 같은 것을 적용해줘야함
 protocol PostListBusinessLogic
 {
-  func doSomething(request: PostList.Something.Request)
+    func fetchPostList(request: PostList.FetchPostList.Request) // 유즈케이스에서 정의한 하나의 타입임
 }
 
 protocol PostListDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class PostListInteractor: PostListBusinessLogic, PostListDataStore
 {
-  var presenter: PostListPresentationLogic?
-  var worker: PostListWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: PostList.Something.Request)
-  {
-    worker = PostListWorker()
-    worker?.doSomeWork()
+    var presenter: PostListPresentationLogic?
+    var worker: PostListWorker?
+    //var name: String = ""
     
-    let response = PostList.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // MARK: Do something
+    
+    /// 뷰 -> 인터렉터한테 시키는 것
+    /// - Parameters:
+    ///   - request : 유즈케이스 즉 하나의 사이클이 돌때 뷰에서 인터렉터 한테 보내는 요청 값
+    func fetchPostList(request: PostList.FetchPostList.Request)
+    {
+        
+        // 요청 값 받으면 우리는 워커를 통해 다시 가져오는 것임
+        worker = PostListWorker()
+        guard let postList = worker?.fetchPostList(count: request.count) else {return} // 이때 카운트는 request 들어온 카운트를 넣어주면 됨
+        
+        let response = PostList.FetchPostList.Response(posts: postList) // 날것 데이터 넣어주기
+        presenter?.presentPostList(response: response)
+    }
 }

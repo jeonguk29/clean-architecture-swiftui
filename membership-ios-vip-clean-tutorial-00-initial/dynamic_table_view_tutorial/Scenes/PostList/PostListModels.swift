@@ -14,18 +14,38 @@ import UIKit
 
 enum PostList
 {
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
+    // MARK: Use cases
+    // 뷰컨 => 인터렉터 => 프리센터 이 한 사이클을 Use Cases라고함
+    
+    
+    enum FetchPostList
     {
+        struct Request // 뷰 -> 인터렉터 한테 요청하는 데이터
+        {
+            var count : Int
+        }
+        struct Response // 워커에서 들어온 데이터 - 날것(데이터)
+        {
+            var posts: [Post]
+        }
+        struct ViewModel // 프리젠터가 -> 뷰에 전달하는 데이터
+        {
+            struct DisplayedPost // 날것이 화면에 보여주기 위해 한번 가공된 데이터
+            {
+                var id: UUID
+                var idInfo: String
+                var title: String
+                var content: String
+                
+                init(post: Post) {
+                    self.id = post.id
+                    self.idInfo = "아이디 : \(post.id)"
+                    self.title = post.title
+                    self.content = post.content
+                }
+            }
+            var displayedPosts: [DisplayedPost]
+            
+        }
     }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
 }

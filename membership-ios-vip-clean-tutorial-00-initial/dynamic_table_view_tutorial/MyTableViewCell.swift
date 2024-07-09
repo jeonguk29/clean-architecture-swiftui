@@ -15,6 +15,7 @@ class MyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userContentLabel: UILabel!
     
+    @IBOutlet var userTitleLabel: UILabel!
     // 쎌이 랜더링(그릴때) 될때
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +24,11 @@ class MyTableViewCell: UITableViewCell {
         
         userProfileImg.layer.cornerRadius = userProfileImg.frame.width / 2
         
+    }
+    
+    func configureCell(post: PostList.FetchPostList.ViewModel.DisplayedPost) {
+        self.userTitleLabel.text = post.title
+        self.userContentLabel.text = post.content
     }
     
 }
