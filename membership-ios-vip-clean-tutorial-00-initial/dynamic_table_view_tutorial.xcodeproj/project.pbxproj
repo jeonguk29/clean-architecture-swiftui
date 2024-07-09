@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6428A4792C3D086200C47990 /* PostListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6428A4752C3D086200C47990 /* PostListViewControllerTests.swift */; };
+		6428A47A2C3D086200C47990 /* PostListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6428A4762C3D086200C47990 /* PostListInteractorTests.swift */; };
+		6428A47B2C3D086200C47990 /* PostListWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6428A4772C3D086200C47990 /* PostListWorkerTests.swift */; };
+		6428A47C2C3D086200C47990 /* PostListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6428A4782C3D086200C47990 /* PostListPresenterTests.swift */; };
 		642F9E342C3C159600939668 /* PostListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642F9E2E2C3C159600939668 /* PostListPresenter.swift */; };
 		642F9E352C3C159600939668 /* PostListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642F9E2F2C3C159600939668 /* PostListWorker.swift */; };
 		642F9E362C3C159600939668 /* PostListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642F9E302C3C159600939668 /* PostListRouter.swift */; };
@@ -29,7 +33,22 @@
 		F2C7F37D29A278D900B13846 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7F37C29A278D900B13846 /* UITableView+Ext.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6428A4702C3D081C00C47990 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2971A8924FE984500955157 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2971A9024FE984500955157;
+			remoteInfo = dynamic_table_view_tutorial;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6428A46C2C3D081C00C47990 /* dynamic_table_view_tutorialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dynamic_table_view_tutorialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6428A4752C3D086200C47990 /* PostListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewControllerTests.swift; sourceTree = "<group>"; };
+		6428A4762C3D086200C47990 /* PostListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListInteractorTests.swift; sourceTree = "<group>"; };
+		6428A4772C3D086200C47990 /* PostListWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListWorkerTests.swift; sourceTree = "<group>"; };
+		6428A4782C3D086200C47990 /* PostListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListPresenterTests.swift; sourceTree = "<group>"; };
 		642F9E2E2C3C159600939668 /* PostListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListPresenter.swift; sourceTree = "<group>"; };
 		642F9E2F2C3C159600939668 /* PostListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListWorker.swift; sourceTree = "<group>"; };
 		642F9E302C3C159600939668 /* PostListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListRouter.swift; sourceTree = "<group>"; };
@@ -54,6 +73,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6428A4692C3D081C00C47990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2971A8E24FE984500955157 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,6 +91,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6428A46D2C3D081C00C47990 /* dynamic_table_view_tutorialTests */ = {
+			isa = PBXGroup;
+			children = (
+				6428A4752C3D086200C47990 /* PostListViewControllerTests.swift */,
+				6428A4762C3D086200C47990 /* PostListInteractorTests.swift */,
+				6428A4772C3D086200C47990 /* PostListWorkerTests.swift */,
+				6428A4782C3D086200C47990 /* PostListPresenterTests.swift */,
+			);
+			path = dynamic_table_view_tutorialTests;
+			sourceTree = "<group>";
+		};
 		642F9E3D2C3C170F00939668 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F2971A9324FE984500955157 /* dynamic_table_view_tutorial */,
+				6428A46D2C3D081C00C47990 /* dynamic_table_view_tutorialTests */,
 				F2971A9224FE984500955157 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				F2971A9124FE984500955157 /* dynamic_table_view_tutorial.app */,
+				6428A46C2C3D081C00C47990 /* dynamic_table_view_tutorialTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,6 +182,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6428A46B2C3D081C00C47990 /* dynamic_table_view_tutorialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6428A4742C3D081C00C47990 /* Build configuration list for PBXNativeTarget "dynamic_table_view_tutorialTests" */;
+			buildPhases = (
+				6428A4682C3D081C00C47990 /* Sources */,
+				6428A4692C3D081C00C47990 /* Frameworks */,
+				6428A46A2C3D081C00C47990 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6428A4712C3D081C00C47990 /* PBXTargetDependency */,
+			);
+			name = dynamic_table_view_tutorialTests;
+			productName = dynamic_table_view_tutorialTests;
+			productReference = 6428A46C2C3D081C00C47990 /* dynamic_table_view_tutorialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F2971A9024FE984500955157 /* dynamic_table_view_tutorial */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2971AA524FE984700955157 /* Build configuration list for PBXNativeTarget "dynamic_table_view_tutorial" */;
@@ -169,10 +226,14 @@
 		F2971A8924FE984500955157 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1160;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = Tuentuenna;
 				TargetAttributes = {
+					6428A46B2C3D081C00C47990 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F2971A9024FE984500955157;
+					};
 					F2971A9024FE984500955157 = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -195,11 +256,19 @@
 			projectRoot = "";
 			targets = (
 				F2971A9024FE984500955157 /* dynamic_table_view_tutorial */,
+				6428A46B2C3D081C00C47990 /* dynamic_table_view_tutorialTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6428A46A2C3D081C00C47990 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2971A8F24FE984500955157 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,6 +284,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6428A4682C3D081C00C47990 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6428A4792C3D086200C47990 /* PostListViewControllerTests.swift in Sources */,
+				6428A47A2C3D086200C47990 /* PostListInteractorTests.swift in Sources */,
+				6428A47B2C3D086200C47990 /* PostListWorkerTests.swift in Sources */,
+				6428A47C2C3D086200C47990 /* PostListPresenterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2971A8D24FE984500955157 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,6 +318,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6428A4712C3D081C00C47990 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2971A9024FE984500955157 /* dynamic_table_view_tutorial */;
+			targetProxy = 6428A4702C3D081C00C47990 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F2971A9A24FE984500955157 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -258,6 +346,63 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6428A4722C3D081C00C47990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9S8KMMC3YH;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.woogie.dynamic-table-view-tutorialTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dynamic_table_view_tutorial.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dynamic_table_view_tutorial";
+			};
+			name = Debug;
+		};
+		6428A4732C3D081C00C47990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9S8KMMC3YH;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.woogie.dynamic-table-view-tutorialTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dynamic_table_view_tutorial.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dynamic_table_view_tutorial";
+			};
+			name = Release;
+		};
 		F2971AA324FE984700955157 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -308,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -362,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -411,6 +556,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6428A4742C3D081C00C47990 /* Build configuration list for PBXNativeTarget "dynamic_table_view_tutorialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6428A4722C3D081C00C47990 /* Debug */,
+				6428A4732C3D081C00C47990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F2971A8C24FE984500955157 /* Build configuration list for PBXProject "dynamic_table_view_tutorial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

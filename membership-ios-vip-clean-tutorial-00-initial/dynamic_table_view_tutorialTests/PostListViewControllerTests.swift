@@ -11,82 +11,99 @@
 //
 
 @testable import dynamic_table_view_tutorial
-import XCTest
+import XCTest // 해주면 다이아몬드 표시가 생김
+
 
 class PostListViewControllerTests: XCTestCase
 {
-  // MARK: Subject under test
-  
-  var sut: PostListViewController!
-  var window: UIWindow!
-  
-  // MARK: Test lifecycle
-  
-  override func setUp()
-  {
-    super.setUp()
-    window = UIWindow()
-    setupPostListViewController()
-  }
-  
-  override func tearDown()
-  {
-    window = nil
-    super.tearDown()
-  }
-  
-  // MARK: Test setup
-  
-  func setupPostListViewController()
-  {
-    let bundle = Bundle.main
-    let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-    sut = storyboard.instantiateViewController(withIdentifier: "PostListViewController") as! PostListViewController
-  }
-  
-  func loadView()
-  {
-    window.addSubview(sut.view)
-    RunLoop.current.run(until: Date())
-  }
-  
-  // MARK: Test doubles
-  
-  class PostListBusinessLogicSpy: PostListBusinessLogic
-  {
-    var doSomethingCalled = false
+    // MARK: Subject under test
+    // 테스트 하는 대상
+    var sut: PostListViewController!
+    var window: UIWindow!
     
-    func doSomething(request: PostList.Something.Request)
+    typealias DisplayedPost = PostList.FetchPostList.ViewModel.DisplayedPost
+    
+    // MARK: - 더미 데이터
+    let dummyDisplayedPost : [DisplayedPost] = ["하하", "호호", "허허"].map{DisplayedPost(post: Post(title: $0, content: $0))}
+    
+    // MARK: Test lifecycle
+    
+    override func setUp()
     {
-      doSomethingCalled = true
+        super.setUp()
+        window = UIWindow()
+        setupPostListViewController()
     }
-  }
-  
-  // MARK: Tests
-  
-  func testShouldDoSomethingWhenViewIsLoaded()
-  {
-    // Given
-    let spy = PostListBusinessLogicSpy()
-    sut.interactor = spy
     
-    // When
-    loadView()
+    override func tearDown()
+    {
+        window = nil
+        super.tearDown()
+    }
     
-    // Then
-    XCTAssertTrue(spy.doSomethingCalled, "viewDidLoad() should ask the interactor to do something")
-  }
-  
-  func testDisplaySomething()
-  {
-    // Given
-    let viewModel = PostList.Something.ViewModel()
+    // MARK: Test setup
     
-    // When
-    loadView()
-    sut.displaySomething(viewModel: viewModel)
+    func setupPostListViewController()
+    {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+        sut = storyboard.instantiateViewController(withIdentifier: "PostListViewController") as! PostListViewController
+        
+        /*
+         테스트를 할때 뷰컨이 진짜 인터렉트를 가지고 있는게 아니라 자료형이 같은 비즈니스 로직 스파이를 하나 만들어서 즉 인터렉트에 스파이를 만들어서 사용을 하는 것임 뷰컨이 실제 인터렉트 가지고 있을때  var interactor: PostListBusinessLogic? 실제 자료형이 아닌 프로토콜로 가지고 있음
+         인터렉트도 프리젠터를   var presenter: PostListPresentationLogic? 이렇게 프로토콜로 가지고 있음 이게 다 테스트를 하기 위해
+         스파이로 넣으려고 프로토콜로 연결 되어있는 것임 즉 테스트 목적이 강함
+         */
+        
+    }
     
-    // Then
-    //XCTAssertEqual(sut.nameTextField.text, "", "displaySomething(viewModel:) should update the name text field")
-  }
+    func loadView()
+    {
+        window.addSubview(sut.view)
+        RunLoop.current.run(until: Date())
+    }
+    
+    // MARK: Test doubles
+    //PostListBusinessLogic이 진짜 인터렉터를 쓰는 것이 아니라 테스트를 위한 인터렉트로 보면 되는 것임
+    class PostListBusinessLogicSpy: PostListBusinessLogic
+    {
+        var fetchPostListCalled = false
+        
+        func fetchPostList(request: PostList.FetchPostList.Request) // 호출이 되는지만 체크
+        {
+            fetchPostListCalled = true
+        }
+    }
+    
+    // MARK: Tests
+    // Given, When, Then 패턴으로 테스트를 진행함
+    func testShouldDoSomethingWhenViewIsLoaded() // 뷰가 로드될때 FetchPostList가 호출되는지 체크
+    {
+        // Given : 환경을 설정
+        let spy = PostListBusinessLogicSpy() // 인터렉터 스파이 생성
+        sut.interactor = spy
+        
+        // When : 어떠한 상황이 있을때
+        loadView()
+        
+        // Then : 원하는 값이 맞는지 체크
+        XCTAssertTrue(spy.fetchPostListCalled, "viewDidLoad() should ask the interactor to do something")
+        // 값이 참이라면 테스트를 통과했다.
+    }
+    
+    // 프리젠터가 시켰을때 화면에 잘 보여주는지 체크
+    // 실제 뷰 로드시 인터렉트 호출되고 인터렉트는 프리젠터에게 시킴 => 프리젠터는 뷰컨에게 데이터를 줌
+    func testDisplayPostList()
+    {
+        // Given
+        let viewModel = PostList.FetchPostList.ViewModel(displayedPosts: dummyDisplayedPost)
+        
+        // When
+        loadView()
+        sut.displayPostList(viewModel: viewModel)
+        
+        // Then
+        XCTAssertEqual(sut.myTableView.indexPathsForVisibleRows?.count, 3, "displaySomething(viewModel:) should update the name text field") // 더미 3개 만들어서 값이 같으면 통과임
+        // 값이 같으면 테스트 통과
+    }
 }

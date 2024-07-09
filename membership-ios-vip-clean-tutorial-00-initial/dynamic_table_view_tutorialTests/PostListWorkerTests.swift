@@ -10,45 +10,48 @@
 //  see http://clean-swift.com
 //
 
-@testable import dynamic_table_view_tutorial
-import XCTest
 
-class PostListWorkerTests: XCTestCase
-{
-  // MARK: Subject under test
-  
-  var sut: PostListWorker!
-  
-  // MARK: Test lifecycle
-  
-  override func setUp()
-  {
-    super.setUp()
-    setupPostListWorker()
-  }
-  
-  override func tearDown()
-  {
-    super.tearDown()
-  }
-  
-  // MARK: Test setup
-  
-  func setupPostListWorker()
-  {
-    sut = PostListWorker()
-  }
-  
-  // MARK: Test doubles
-  
-  // MARK: Tests
-  
-  func testSomething()
-  {
-    // Given
-    
-    // When
-    
-    // Then
-  }
-}
+// MARK: - 워커는 더미데이터라 지금 테스트는 필요없음
+
+//@testable import dynamic_table_view_tutorial
+//import XCTest
+//
+//class PostListWorkerTests: XCTestCase
+//{
+//  // MARK: Subject under test
+//  
+//  var sut: PostListWorker!
+//  
+//  // MARK: Test lifecycle
+//  
+//  override func setUp()
+//  {
+//    super.setUp()
+//    setupPostListWorker()
+//  }
+//  
+//  override func tearDown()
+//  {
+//    super.tearDown()
+//  }
+//  
+//  // MARK: Test setup
+//  
+//  func setupPostListWorker()
+//  {
+//    sut = PostListWorker()
+//  }
+//  
+//  // MARK: Test doubles
+//  
+//  // MARK: Tests
+//  
+//  func testSomething()
+//  {
+//    // Given
+//    
+//    // When
+//    
+//    // Then
+//  }
+//}
