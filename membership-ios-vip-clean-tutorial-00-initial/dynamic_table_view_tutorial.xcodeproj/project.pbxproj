@@ -19,6 +19,9 @@
 		642F9E392C3C159600939668 /* PostListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642F9E332C3C159600939668 /* PostListInteractor.swift */; };
 		642F9E3C2C3C162D00939668 /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = 642F9E3B2C3C162D00939668 /* Fakery */; };
 		642F9E3F2C3C172D00939668 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642F9E3E2C3C172D00939668 /* Post.swift */; };
+		647EC5DD2C3FF3C800A426FD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 647EC5DC2C3FF3C800A426FD /* Realm */; };
+		647EC5DF2C3FF3C800A426FD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 647EC5DE2C3FF3C800A426FD /* RealmSwift */; };
+		647EC5E12C3FF42D00A426FD /* PostRealmEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647EC5E02C3FF42D00A426FD /* PostRealmEntity.swift */; };
 		F27D7F2027662CB30017E3E8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D7F1F27662CB30017E3E8 /* ViewModel.swift */; };
 		F2971A9524FE984500955157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2971A9424FE984500955157 /* AppDelegate.swift */; };
 		F2971A9724FE984500955157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2971A9624FE984500955157 /* SceneDelegate.swift */; };
@@ -56,6 +59,7 @@
 		642F9E322C3C159600939668 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 		642F9E332C3C159600939668 /* PostListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListInteractor.swift; sourceTree = "<group>"; };
 		642F9E3E2C3C172D00939668 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		647EC5E02C3FF42D00A426FD /* PostRealmEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRealmEntity.swift; sourceTree = "<group>"; };
 		F27D7F1F27662CB30017E3E8 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		F2971A9124FE984500955157 /* dynamic_table_view_tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dynamic_table_view_tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2971A9424FE984500955157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				647EC5DF2C3FF3C800A426FD /* RealmSwift in Frameworks */,
+				647EC5DD2C3FF3C800A426FD /* Realm in Frameworks */,
 				642F9E3C2C3C162D00939668 /* Fakery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				642F9E3E2C3C172D00939668 /* Post.swift */,
+				647EC5E02C3FF42D00A426FD /* PostRealmEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +222,8 @@
 			name = dynamic_table_view_tutorial;
 			packageProductDependencies = (
 				642F9E3B2C3C162D00939668 /* Fakery */,
+				647EC5DC2C3FF3C800A426FD /* Realm */,
+				647EC5DE2C3FF3C800A426FD /* RealmSwift */,
 			);
 			productName = dynamic_table_view_tutorial;
 			productReference = F2971A9124FE984500955157 /* dynamic_table_view_tutorial.app */;
@@ -250,6 +259,7 @@
 			mainGroup = F2971A8824FE984500955157;
 			packageReferences = (
 				642F9E3A2C3C162D00939668 /* XCRemoteSwiftPackageReference "Fakery" */,
+				647EC5DB2C3FF3C800A426FD /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = F2971A9224FE984500955157 /* Products */;
 			projectDirPath = "";
@@ -303,6 +313,7 @@
 				F2971A9924FE984500955157 /* ViewController.swift in Sources */,
 				F2971AAB24FE9C2100955157 /* MyTableViewCell.swift in Sources */,
 				F2971A9524FE984500955157 /* AppDelegate.swift in Sources */,
+				647EC5E12C3FF42D00A426FD /* PostRealmEntity.swift in Sources */,
 				F2C7F37D29A278D900B13846 /* UITableView+Ext.swift in Sources */,
 				642F9E3F2C3C172D00939668 /* Post.swift in Sources */,
 				F2971A9724FE984500955157 /* SceneDelegate.swift in Sources */,
@@ -594,6 +605,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		647EC5DB2C3FF3C800A426FD /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -601,6 +620,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 642F9E3A2C3C162D00939668 /* XCRemoteSwiftPackageReference "Fakery" */;
 			productName = Fakery;
+		};
+		647EC5DC2C3FF3C800A426FD /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 647EC5DB2C3FF3C800A426FD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		647EC5DE2C3FF3C800A426FD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 647EC5DB2C3FF3C800A426FD /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

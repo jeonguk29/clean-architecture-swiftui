@@ -12,26 +12,203 @@
 
 import UIKit
 import Fakery
+import RealmSwift
+
+
+// 붕어빵 틀 같은 프로토콜 하나 만들어 주기
+// - 겉의 모양을 통일화
+protocol PostStore {
+    // 전체 조회
+    func fetchPostList() -> [Post]
+    
+    // 단일 조회
+    func fetchPostItem(id: String) -> Post?
+    
+    // 단일 수정
+    func updatePostItem(id: String, title: String, content: String) -> Post?
+    
+    // 단일 삭제
+    func deletePostItem(id: String) -> Post?
+    
+    // 항목 추가
+    func addPostItem(title: String, content: String) -> Post
+}
+
+
+
+// CoreData을 통해 Crud
+class CoreDataPostStore : PostStore {
+
+    // 전체 조회
+    func fetchPostList() -> [Post] {
+        return []
+    }
+    
+    // 단일 조회
+    func fetchPostItem(id: String) -> Post? {
+        return nil
+    }
+    
+    // 단일 수정
+    func updatePostItem(id: String, title: String, content: String) -> Post? {
+        return nil
+    }
+    
+    // 단일 삭제
+    func deletePostItem(id: String) -> Post? {
+        return nil
+    }
+    
+    // 항목 추가
+    func addPostItem(title: String, content: String) -> Post {
+        return Post(title: "", content: "")
+    }
+    
+}
+
+
+// Realm을 통해 Crud
+class RealmPostStore : PostStore {
+    
+    // Open the local-only default realm
+    let realm = try! Realm()
+    
+    // 전체 조회
+    func fetchPostList() -> [Post] {
+        
+        // Get all todos in the realm
+        let postRealmEntities = realm.objects(PostRealmEntity.self)
+        
+        return postRealmEntities.map{ Post($0) } // PostRealmEntity -> Post 로 만들어 주는 것임
+    }
+    
+    // 단일 조회
+    func fetchPostItem(id: String) -> Post? {
+        if let foundEntity = findPostEntity(id) {
+            return Post(foundEntity) // 찾으면 PostRealmEntity -> Post로 반환
+        } else {
+            return nil // 못 찾으면 nil
+        }
+    }
+    
+    // 단일 수정
+    func updatePostItem(id: String, title: String, content: String) -> Post? {
+        
+        
+        if let foundEntity = findPostEntity(id) {
+            
+            // Open a thread-safe transaction
+            try! realm.write {
+                // Update some properties on the instance.
+                // These changes are saved to the realm
+                foundEntity.title = title
+                foundEntity.content = content
+            }
+            return Post(foundEntity) // 수정 Entity -> Post로 반환
+        } else {
+            return nil
+        }
+    }
+    
+    // 단일 삭제
+    func deletePostItem(id: String) -> Post? {
+        if let foundEntity = findPostEntity(id) {
+            
+            let deletedPost = Post(foundEntity) // 다른 메모리 공간에 일단 생성
+            
+            // Open a thread-safe transaction
+            try! realm.write {
+                realm.delete(foundEntity)
+            }
+            return deletedPost // 어떤것을 지웠는지 반환
+        } else {
+            return nil
+        }
+    }
+    
+    // 항목 추가
+    func addPostItem(title: String, content: String) -> Post {
+        
+        let addedPostEntity = PostRealmEntity(title: title, content: content)
+        
+        // Open a thread-safe transaction.
+        try! realm.write {
+            // Add the instance to the realm.
+            realm.add(addedPostEntity)
+        }
+        
+        return Post(addedPostEntity)
+    }
+    
+    //MARK: - Inner Method
+    // 겉에 모양은 같지만 이런 부분은 다르게 구현하여 사용하면 됨
+    private func findPostEntity(_ id: String) -> PostRealmEntity? {
+        return realm.object(ofType: PostRealmEntity.self, forPrimaryKey: id)
+    }
+    
+}
+
+
+// 붕어빵 (워커)
+// 워커 : 워커는 postStore가 어떤 존재인지 알수 없음 외부에 누가 (붕어빵 아저씨) 넣어주면 넣어줬군아 하고 일하면 되는 것임
+class PostListWorker {
+    
+    // 앙꼬
+    //Dependency
+    var postStore: PostStore // 이렇게 추상 자료형 PostStore를 받는다하고
+    
+    init(postStore: PostStore) { // 외부에서 의존성 주입을 받으면 됨
+        self.postStore = postStore
+    }
+    
+    // 전체 조회
+    func fetchPostList() -> [Post] {
+        return self.postStore.fetchPostList()
+    }
+    
+    // 단일 조회
+    func fetchPostItem(id: String) -> Post? {
+        return self.postStore.fetchPostItem(id: id)
+    }
+    
+    // 단일 수정
+    func updatePostItem(id: String, title: String, content: String) -> Post? {
+        return self.postStore.updatePostItem(id: id, title: title, content: content)
+    }
+    
+    // 단일 삭제
+    func deletePostItem(id: String) -> Post? {
+        return self.postStore.deletePostItem(id: id)
+    }
+    
+    // 항목 추가
+    func addPostItem(title: String, content: String) -> Post {
+        return self.postStore.addPostItem(title: title, content: content)
+    }
+    
+}
+
 
 
 // 외부 데이터 가져오기, API, 코어데이터, realm 등
-class PostListWorker
-{
-    /// 포스트 리스트 가져오기
-    /// - Returns: 가져온 포스트 배열
-    func fetchPostList(count: Int) -> [Post]
-    {
-        let faker = Faker(locale: "ko")
-        
-        var postList : [Post] = []
-        
-        for _ in 0..<count {
-            let dummyPost = Post(title: faker.company.name(), content: faker.lorem.paragraphs(amount: 10))
-        
-            
-            postList.append(dummyPost)
-        }
-       
-        return postList
-    }
-}
+//class PostListWorker
+//{
+//    /// 포스트 리스트 가져오기
+//    /// - Returns: 가져온 포스트 배열
+//    func fetchPostList(count: Int) -> [Post]
+//    {
+//        let faker = Faker(locale: "ko")
+//        
+//        var postList : [Post] = []
+//        
+//        for _ in 0..<count {
+//            let dummyPost = Post(title: faker.company.name(), content: faker.lorem.paragraphs(amount: 10))
+//        
+//            
+//            postList.append(dummyPost)
+//        }
+//       
+//        return postList
+//    }
+//}
+//

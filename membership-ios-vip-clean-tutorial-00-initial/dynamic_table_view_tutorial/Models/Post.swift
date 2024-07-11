@@ -9,7 +9,19 @@
 import Foundation
 
 struct Post {
-    let id : UUID = UUID()
+    var id : String = UUID().uuidString
     let title: String
     let content: String
+    
+    init(title: String, content: String) {
+        self.title = title
+        self.content = content
+    }
+    
+    // entity를 하나 넣으면 Post 라는 데이터가 하나 나오는걸 만든 것임
+    init(_ entity: PostRealmEntity) {
+        self.id = entity._id.stringValue
+        self.title = entity.title ?? ""
+        self.content = entity.content ?? ""
+    }
 }
