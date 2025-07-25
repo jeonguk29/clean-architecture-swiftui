@@ -10,7 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var movies: [MovieEntity] = []
-    private let repository = MovieRepository()
+    private let repository: MovieRepositoryInterface
+    
+    init(repository: MovieRepositoryInterface) {
+        self.repository = repository
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -33,8 +38,7 @@ struct ContentView: View {
         .padding()
         .task {
             do {
-                let moviesDTOs = try await repository.fetchMovie()
-                let moviesEntities = moviesDTOs.map { $0.toEntity() }
+                let moviesEntities = try await repository.fetchMovies()
                 self.movies = moviesEntities
                 // repository.sortMoviesByTitle(movies)
             } catch {
@@ -46,5 +50,5 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    ContentView(repository: MockMovieRepository())
 }
