@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @State private var movies: [MovieDTO] = []
+    
+    @State private var movies: [MovieEntity] = []
     private let repository = MovieRepository()
     var body: some View {
         ScrollView {
@@ -17,12 +17,12 @@ struct ContentView: View {
                 ForEach(movies, id: \.id) { movie in
                     HStack {
                         Text("\(movie.title)")
-
-                        Text(movie.date_uploaded.date().string())
+                        
+                        Text(movie.uploadedDate.string())
                             .font(.callout)
                     }
-
-                    AsyncImage(url: URL(string: movie.background_image)!) { phase in
+                    
+                    AsyncImage(url: URL(string: movie.imageURL)!) { phase in
                         phase.image?
                             .resizable()
                             .frame(width: 100, height: 100)
@@ -33,16 +33,16 @@ struct ContentView: View {
         .padding()
         .task {
             do {
-                let movies = try await repository.fetchMovie()
-                self.movies = repository.sortMoviesByTitle(movies)
+                let moviesDTOs = try await repository.fetchMovie()
+                let moviesEntities = moviesDTOs.map { $0.toEntity() }
+                self.movies = moviesEntities
+                // repository.sortMoviesByTitle(movies)
             } catch {
                 print(error)
             }
         }
     }
 }
-
-
 
 
 #Preview {

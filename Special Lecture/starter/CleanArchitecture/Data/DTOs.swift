@@ -34,3 +34,9 @@ struct MovieDTO: Decodable {
     var myRating: Float?
     let date_uploaded: String
 }
+
+extension MovieDTO {
+    func toEntity() -> MovieEntity {
+        MovieEntity(id: id, title: title, imageURL: background_image, uploadedDate: date_uploaded.date())
+    }
+}
