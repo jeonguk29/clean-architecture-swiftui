@@ -22,15 +22,16 @@ struct ContentView: View {
                     HStack {
                         Text("\(movie.title)")
                         
-                        Text(movie.uploadedDate.string())
+                        Text(movie.dateString)
                             .font(.callout)
                     }
-                    
-                    AsyncImage(url: URL(string: movie.imageURL)!) { phase in
+
+                    AsyncImage(url: movie.imageURL) { phase in
                         phase.image?
                             .resizable()
                             .frame(width: 100, height: 100)
                     }
+
                 }
             }
         }
