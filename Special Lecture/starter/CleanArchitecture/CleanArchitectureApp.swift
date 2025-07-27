@@ -10,16 +10,15 @@ import SwiftUI
 @main
 struct CleanArchitectureApp: App {
     
-    let useCase: MovieUseCase = {
+    var movieListViewModel: MovieListViewModel {
         let repository = MovieRepository()
-        return MovieUseCase(repository: repository)
-    }()
+        let useCase = MovieUseCase(repository: repository)
+        return MovieListViewModel(movieUseCase: useCase)
+    }
     
     var body: some Scene {
         WindowGroup {
-            ContentView(
-                useCase: useCase
-            )
+            ContentView(viewModel: movieListViewModel)
         }
     }
 }

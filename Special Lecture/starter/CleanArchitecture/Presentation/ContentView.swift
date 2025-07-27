@@ -9,17 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var movies: [MovieEntity] = []
-    private let useCase: MovieUseCase
-    
-    init(useCase: MovieUseCase) {
-        self.useCase = useCase
+    @ObservedObject private var viewModel: MovieListViewModel
+
+    init(viewModel: MovieListViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(movies, id: \.id) { movie in
+                ForEach(viewModel.movies, id: \.id) { movie in
                     HStack {
                         Text("\(movie.title)")
                         
@@ -38,9 +37,7 @@ struct ContentView: View {
         .padding()
         .task {
             do {
-                let moviesEntities = try await useCase.fetchMovies()
-                self.movies = moviesEntities
-                // repository.sortMoviesByTitle(movies)
+                try await viewModel.fetchMovies()
             } catch {
                 print(error)
             }
@@ -48,11 +45,12 @@ struct ContentView: View {
     }
 }
 
-
 #Preview {
     ContentView(
-        useCase: .init(
-            repository: MockMovieRepository()
+        viewModel: .init(
+            movieUseCase: .init(
+                repository: MockMovieRepository()
+            )
         )
     )
 }
