@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct CleanArchitectureApp: App {
+    
+    let useCase: MovieUseCase = {
+        let repository = MovieRepository()
+        return MovieUseCase(repository: repository)
+    }()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(repository: MovieRepository())
+            ContentView(
+                useCase: useCase
+            )
         }
     }
 }

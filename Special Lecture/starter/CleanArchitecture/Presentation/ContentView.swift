@@ -10,10 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var movies: [MovieEntity] = []
-    private let repository: MovieRepositoryInterface
+    private let useCase: MovieUseCase
     
-    init(repository: MovieRepositoryInterface) {
-        self.repository = repository
+    init(useCase: MovieUseCase) {
+        self.useCase = useCase
     }
     
     var body: some View {
@@ -38,7 +38,7 @@ struct ContentView: View {
         .padding()
         .task {
             do {
-                let moviesEntities = try await repository.fetchMovies()
+                let moviesEntities = try await useCase.fetchMovies()
                 self.movies = moviesEntities
                 // repository.sortMoviesByTitle(movies)
             } catch {
@@ -50,5 +50,9 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView(repository: MockMovieRepository())
+    ContentView(
+        useCase: .init(
+            repository: MockMovieRepository()
+        )
+    )
 }
